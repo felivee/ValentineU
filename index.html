@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Happy Valentine's Day! ❤️</title>
+  <!-- Google Fonts: Dancing Script & Plus Jakarta Sans -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Sacramento&amp;display=swap"
+    rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            rosewater: '#FFF0F3',
+            pastelPink: '#FFB3C6',
+            romanticRose: '#FF4D6D',
+            deepCrimson: '#C9184A',
+            softBlush: '#FFE3E8',
+          },
+          fontFamily: {
+            script: ['"Dancing Script"', 'cursive'],
+            fancy: ['"Sacramento"', 'cursive'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Background Gradient Pastel */
+    body {
+      background: radial-gradient(circle at top left, #FFF0F5, #FFE4E6, #FFF5F7);
+      min-height: 100vh;
+      overflow-x: hidden;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    /* Floating Hearts Canvas / Elements */
+    .heart-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .floating-heart {
+      position: absolute;
+      bottom: -10vh;
+      color: rgba(255, 107, 129, 0.45);
+      animation: floatUp linear infinite;
+      user-select: none;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) rotate(0deg) scale(0.8);
+        opacity: 0;
+      }
+
+      15% {
+        opacity: 0.7;
+      }
+
+      80% {
+        opacity: 0.6;
+      }
+
+      100% {
+        transform: translateY(-115vh) rotate(360deg) scale(1.2);
+        opacity: 0;
+      }
+    }
+
+    /* Polaroid Card Styling */
+    .polaroid {
+      background: white;
+      padding: 12px 12px 24px 12px;
+      box-shadow: 0 10px 25px -5px rgba(225, 29, 72, 0.15), 0 8px 10px -6px rgba(225, 29, 72, 0.1);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transform-origin: center center;
+    }
+
+    .polaroid:hover {
+      transform: scale(1.05) rotate(0deg) !important;
+      box-shadow: 0 20px 30px -10px rgba(225, 29, 72, 0.3);
+      z-index: 10;
+    }
+
+    /* Custom Glassmorphism */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      box-shadow: 0 20px 40px -15px rgba(255, 154, 162, 0.3);
+    }
+
+    /* Pulse Glow Animation */
+    @keyframes gentlePulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 15px rgba(255, 77, 109, 0.4));
+      }
+
+      50% {
+        transform: scale(1.04);
+        filter: drop-shadow(0 0 25px rgba(255, 77, 109, 0.7));
+      }
+    }
+
+    .pulse-glow {
+      animation: gentlePulse 3s infinite ease-in-out;
+    }
+
+    /* Letter Envelope Animation */
+    .letter-popup-enter {
+      animation: popIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    @keyframes popIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.85) translateY(20px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body class="text-gray-800 relative selection:bg-rose-200 selection:text-rose-700">
+  <!-- Floating Hearts Background Container -->
+  <div class="heart-bg" id="heartContainer">
+    <div class="floating-heart"
+      style="left: 28.2636vw; font-size: 18.791px; animation-duration: 10.8902s; animation-delay: 0.411544s;">🌸</div>
+    <div class="floating-heart"
+      style="left: 38.5171vw; font-size: 33.0896px; animation-duration: 13.555s; animation-delay: 1.63685s;">💖</div>
+    <div class="floating-heart"
+      style="left: 46.5509vw; font-size: 21.7964px; animation-duration: 9.38211s; animation-delay: 0.229514s;">💖</div>
+    <div class="floating-heart"
+      style="left: 84.0757vw; font-size: 33.1209px; animation-duration: 10.1008s; animation-delay: 1.53883s;">💕</div>
+    <div class="floating-heart"
+      style="left: 58.4991vw; font-size: 28.536px; animation-duration: 12.3118s; animation-delay: 0.0578408s;">🌸</div>
+    <div class="floating-heart"
+      style="left: 57.2421vw; font-size: 28.7885px; animation-duration: 7.56825s; animation-delay: 1.17946s;">🌸</div>
+    <div class="floating-heart"
+      style="left: 65.1955vw; font-size: 14.0059px; animation-duration: 7.00887s; animation-delay: 0.0397736s;">✨</div>
+    <div class="floating-heart"
+      style="left: 40.1746vw; font-size: 23.6977px; animation-duration: 9.98966s; animation-delay: 0.139665s;">💗</div>
+    <div class="floating-heart"
+      style="left: 27.3673vw; font-size: 30.2247px; animation-duration: 8.37434s; animation-delay: 0.711663s;">❤️</div>
+    <div class="floating-heart"
+      style="left: 83.019vw; font-size: 23.2624px; animation-duration: 7.42086s; animation-delay: 0.983293s;">💗</div>
+    <div class="floating-heart"
+      style="left: 97.4714vw; font-size: 25.8732px; animation-duration: 7.16639s; animation-delay: 0.757656s;">💗</div>
+    <div class="floating-heart"
+      style="left: 60.5962vw; font-size: 28.3473px; animation-duration: 10.2495s; animation-delay: 0.847797s;">❤️</div>
+    <div class="floating-heart"
+      style="left: 79.769vw; font-size: 31.6341px; animation-duration: 13.6981s; animation-delay: 0.704467s;">❤️</div>
+  </div>
+  <div aria-hidden="true" class="fixed inset-0 pointer-events-none z-10 overflow-hidden select-none">
+    <style>
+      @keyframes gentleSwayLeft {
+
+        0%,
+        100% {
+          transform: rotate(0deg) translateY(0px);
+        }
+
+        50% {
+          transform: rotate(2.5deg) translateY(8px);
+        }
+      }
+
+      @keyframes gentleSwayRight {
+
+        0%,
+        100% {
+          transform: rotate(0deg) translateY(0px);
+        }
+
+        50% {
+          transform: rotate(-2.5deg) translateY(8px);
+        }
+      }
+
+      @keyframes softTwinkle {
+
+        0%,
+        100% {
+          opacity: 0.35;
+          transform: scale(0.9);
+        }
+
+        50% {
+          opacity: 0.95;
+          transform: scale(1.15);
+        }
+      }
+
+      .sway-left {
+        animation: gentleSwayLeft 6s ease-in-out infinite;
+        transform-origin: top left;
+      }
+
+      .sway-right {
+        animation: gentleSwayRight 6.5s ease-in-out infinite;
+        transform-origin: top right;
+      }
+
+      .twinkle {
+        animation: softTwinkle 3.5s ease-in-out infinite;
+      }
+    </style>
+    <div class="absolute -top-4 left-2 sm:left-6 flex flex-col items-center gap-6 sway-left opacity-75 hidden sm:flex">
+      <div class="w-0.5 h-16 bg-gradient-to-b from-rose-300 to-rose-400/40"></div>
+      <div class="flex flex-col items-center gap-4 text-romanticRose"><span
+          class="text-2xl filter drop-shadow-sm">🌸</span>
+        <div class="w-0.5 h-12 bg-rose-300/60"></div><span class="text-xl filter drop-shadow-sm">💖</span>
+        <div class="w-0.5 h-14 bg-rose-300/50"></div><span class="text-2xl filter drop-shadow-sm">🌷</span>
+        <div class="w-0.5 h-10 bg-rose-300/40"></div><span class="text-xl filter drop-shadow-sm">✨</span>
+        <div class="w-0.5 h-12 bg-rose-300/30"></div><span class="text-lg filter drop-shadow-sm">💕</span>
+      </div>
+    </div>
+    <div
+      class="absolute -top-6 right-2 sm:right-6 flex flex-col items-center gap-6 sway-right opacity-75 hidden sm:flex">
+      <div class="w-0.5 h-20 bg-gradient-to-b from-pink-300 to-rose-400/40"></div>
+      <div class="flex flex-col items-center gap-4 text-romanticRose"><span
+          class="text-2xl filter drop-shadow-sm">🌹</span>
+        <div class="w-0.5 h-12 bg-rose-300/60"></div><span class="text-xl filter drop-shadow-sm">💕</span>
+        <div class="w-0.5 h-16 bg-rose-300/50"></div><span class="text-2xl filter drop-shadow-sm">🌸</span>
+        <div class="w-0.5 h-10 bg-rose-300/40"></div><span class="text-lg filter drop-shadow-sm">✨</span>
+        <div class="w-0.5 h-12 bg-rose-300/30"></div><span class="text-xl filter drop-shadow-sm">💌</span>
+      </div>
+    </div>
+    <div class="absolute left-4 top-1/3 text-pink-400 twinkle text-xl">✨</div>
+    <div class="absolute left-8 bottom-1/4 text-rose-400 twinkle text-2xl" style="animation-delay: 1.5s;">🌸</div>
+    <div class="absolute right-6 top-1/2 text-pink-400 twinkle text-xl" style="animation-delay: 1s;">✨</div>
+    <div class="absolute right-8 bottom-1/3 text-rose-400 twinkle text-2xl" style="animation-delay: 2.2s;">💖</div>
+  </div>
+  <!-- Music toggle button (decorative / aesthetic) -->
+  <div class="fixed top-5 right-5 z-40">
+    <button
+      class="flex items-center gap-2 bg-white/80 hover:bg-white text-rose-600 px-4 py-2 rounded-full shadow-md backdrop-blur border border-rose-100 transition-all text-sm font-medium hover:scale-105 active:scale-95"
+      id="musicToggle">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="music"
+        aria-hidden="true" class="lucide lucide-music w-4 h-4 text-rose-500 animate-spin"
+        style="animation-duration: 4s;">
+        <path d="M9 18V5l12-2v13"></path>
+        <circle cx="6" cy="18" r="3"></circle>
+        <circle cx="18" cy="16" r="3"></circle>
+      </svg>
+      <span id="musicText" class="">Romantic Melody</span>
+    </button>
+  </div>
+  <main class="relative z-10 max-w-4xl mx-auto px-4 py-12 md:py-16 flex flex-col items-center">
+    <!-- Hero / Sapaan Manis -->
+    <header class="text-center mb-10 md:mb-14">
+      <div
+        class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-rose-100/90 text-rose-600 text-xs md:text-sm font-semibold tracking-wide uppercase mb-4 shadow-sm border border-rose-200">
+        <span class="">✨ 14 Februari Spesial Untukmu ✨</span>
+      </div>
+      <h1
+        class="font-script text-4xl sm:text-6xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-romanticRose via-deepCrimson to-pink-500 drop-shadow-sm leading-tight mb-3">
+        Happy Valentine's Day, <span class="underline decoration-wavy decoration-rose-300"
+          id="partnerNameDisplay">Sayang</span>!
+      </h1>
+      <p class="text-base sm:text-lg text-rose-800/80 max-w-xl mx-auto font-normal mt-2 leading-relaxed">
+        Terima kasih sudah selalu ada, menghias hari-hariku dengan tawa, kehangatan, dan cinta yang tulus. Ini hadiah
+        kecil penuh rasa untukmu.
+      </p>
+      <!-- Edit Nama Cepat -->
+      <div class="mt-4 flex items-center justify-center gap-2 text-xs text-rose-500">
+        <button class="hover:underline flex items-center gap-1 opacity-75 hover:opacity-100 transition"
+          onclick="changeNamePrompt()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="edit-3"
+            aria-hidden="true" class="lucide lucide-edit-3 w-3.5 h-3.5">
+            <path d="M13 21h8"></path>
+            <path
+              d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z">
+            </path>
+          </svg> Ganti Nama Pasangan
+        </button>
+      </div>
+    </header>
+    <!-- Tombol Buka Surat Cinta -->
+    <section class="mb-14 text-center">
+      <button
+        class="pulse-glow group relative inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-romanticRose to-pink-600 hover:from-deepCrimson hover:to-romanticRose text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 active:translate-y-0 text-lg"
+        id="openLetterBtn">
+        <span class="text-2xl transition-transform group-hover:scale-125">💌</span>
+        <span class="">Buka Surat Cinta ❤️</span>
+      </button>
+      <p class="text-xs text-rose-400 mt-2 italic">Klik untuk membaca pesan rahasia dari hatiku</p>
+    </section>
+    <!-- Interaktif: Will You Be My Valentine? -->
+    <section class="w-full max-w-lg mx-auto mb-16 px-4">
+      <div
+        class="glass-card rounded-3xl p-6 sm:p-8 text-center relative overflow-hidden border border-rose-200/60 shadow-xl">
+        <div
+          class="w-16 h-16 bg-rose-100 rounded-full flex items-center justify-center mx-auto mb-4 text-rose-500 shadow-inner">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            data-lucide="heart-handshake" aria-hidden="true" class="lucide lucide-heart-handshake w-8 h-8">
+            <path
+              d="M19.414 14.414C21 12.828 22 11.5 22 9.5a5.5 5.5 0 0 0-9.591-3.676.6.6 0 0 1-.818.001A5.5 5.5 0 0 0 2 9.5c0 2.3 1.5 4 3 5.5l5.535 5.362a2 2 0 0 0 2.879.052 2.12 2.12 0 0 0-.004-3 2.124 2.124 0 1 0 3-3 2.124 2.124 0 0 0 3.004 0 2 2 0 0 0 0-2.828l-1.881-1.882a2.41 2.41 0 0 0-3.409 0l-1.71 1.71a2 2 0 0 1-2.828 0 2 2 0 0 1 0-2.828l2.823-2.762">
+            </path>
+          </svg>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold font-script text-rose-700 mb-2">
+          Will you be my Valentine? 🌹
+        </h2>
+        <p class="text-sm text-gray-600 mb-6" id="interactiveSubtitle">
+          Jawab jujur dari lubuk hatimu yaa... 😉
+        </p>
+        <!-- Area Tombol Pilihan -->
+        <div class="relative min-h-[90px] flex items-center justify-center gap-4 sm:gap-6" id="choiceArea">
+          <!-- Tombol Mau -->
+          <button
+            class="px-7 py-3 bg-romanticRose hover:bg-deepCrimson text-white font-semibold rounded-2xl shadow-md hover:shadow-lg transition-all transform hover:scale-105 active:scale-95 flex items-center gap-2"
+            id="btnYes">
+            <span class="">Mau Banget!</span> 💖
+          </button>
+          <!-- Tombol Enggak (Bisa kabur) -->
+          <button
+            class="px-7 py-3 bg-white text-gray-500 hover:text-gray-700 font-semibold rounded-2xl border border-rose-200 shadow-sm transition-all duration-150 select-none cursor-pointer"
+            id="btnNo">
+            Enggak 😜
+          </button>
+        </div>
+        <!-- Feedback Success Box (Muncul saat klik Mau) -->
+        <div class="hidden mt-4 p-5 bg-rose-50 border border-rose-200 rounded-2xl text-center" id="successBox">
+          <div class="text-4xl mb-2">🥰✨💍</div>
+          <h3 class="text-xl font-bold text-rose-700 font-script">Yaaay! Kamu resmi jadi Valentine-ku!</h3>
+          <p class="text-xs text-rose-600 mt-1">Janji ya kita rayain hari ini dengan senyum termanis dan es krim
+            favoritmu! 🍦</p>
+        </div>
+      </div>
+    </section>
+    <!-- Galeri Foto Polaroid Estetik -->
+    <section class="w-full mb-16">
+      <div class="text-center mb-8">
+        <span class="text-rose-500 font-script text-2xl block">Koleksi Kenangan Manis</span>
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-800">Our Romantic Memories 📸</h2>
+        <div class="w-16 h-1 bg-rose-300 rounded-full mx-auto mt-2"></div>
+      </div>
+      <!-- Polaroid Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-6 px-4">
+        <!-- Polaroid 1 -->
+        <div class="polaroid rounded-sm sm:-rotate-2 transition hover:rotate-0">
+          <div class="overflow-hidden rounded bg-rose-50 aspect-[4/3] mb-3 relative group">
+            <img alt="Momen Pertama"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg">
+            <div class="absolute top-2 right-2 bg-white/80 rounded-full p-1.5 shadow-sm text-rose-500">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                data-lucide="coffee" aria-hidden="true" class="lucide lucide-coffee w-4 h-4">
+                <path d="M10 2v2"></path>
+                <path d="M14 2v2"></path>
+                <path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1">
+                </path>
+                <path d="M6 2v2"></path>
+              </svg>
+            </div>
+          </div>
+          <p class="font-script text-xl text-center text-gray-700">Kencan Pertama Kita ☕</p>
+          <p class="text-[11px] text-center text-gray-400 mt-0.5">Waktu pertama kali salah tingkah bareng</p>
+        </div>
+        <!-- Polaroid 2 -->
+        <div class="polaroid rounded-sm sm:rotate-2 transition hover:rotate-0">
+          <div class="overflow-hidden rounded bg-rose-50 aspect-[4/3] mb-3 relative group">
+            <img alt="Momen Sunset"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg">
+            <div class="absolute top-2 right-2 bg-white/80 rounded-full p-1.5 shadow-sm text-rose-500">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="sun"
+                aria-hidden="true" class="lucide lucide-sun w-4 h-4">
+                <circle cx="12" cy="12" r="4"></circle>
+                <path d="M12 2v2"></path>
+                <path d="M12 20v2"></path>
+                <path d="m4.93 4.93 1.41 1.41"></path>
+                <path d="m17.66 17.66 1.41 1.41"></path>
+                <path d="M2 12h2"></path>
+                <path d="M20 12h2"></path>
+                <path d="m6.34 17.66-1.41 1.41"></path>
+                <path d="m19.07 4.93-1.41 1.41"></path>
+              </svg>
+            </div>
+          </div>
+          <p class="font-script text-xl text-center text-gray-700">Senja &amp; Ceritamu 🌅</p>
+          <p class="text-[11px] text-center text-gray-400 mt-0.5">Duduk berdua mendengarkan impianmu</p>
+        </div>
+        <!-- Polaroid 3 -->
+        <div class="polaroid rounded-sm sm:-rotate-1 transition hover:rotate-0">
+          <div class="overflow-hidden rounded bg-rose-50 aspect-[4/3] mb-3 relative group">
+            <img alt="Tertawa Bersama"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg">
+            <div class="absolute top-2 right-2 bg-white/80 rounded-full p-1.5 shadow-sm text-rose-500">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                data-lucide="sparkles" aria-hidden="true" class="lucide lucide-sparkles w-4 h-4">
+                <path
+                  d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z">
+                </path>
+                <path d="M20 2v4"></path>
+                <path d="M22 4h-4"></path>
+                <circle cx="4" cy="20" r="2"></circle>
+              </svg>
+            </div>
+          </div>
+          <p class="font-script text-xl text-center text-gray-700">Tawa Bahagia Selalu ✨</p>
+          <p class="text-[11px] text-center text-gray-400 mt-0.5">Momen sederhana yang paling kurindukan</p>
+        </div>
+      </div>
+    </section>
+    <!-- Footer Romantis -->
+    <footer class="text-center py-6 border-t border-rose-200/50 w-full">
+      <p class="text-sm text-rose-600 font-medium flex items-center justify-center gap-1.5">
+        Dibuat dengan segenap cinta <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+          data-lucide="heart" aria-hidden="true"
+          class="lucide lucide-heart w-4 h-4 text-romanticRose fill-romanticRose inline">
+          <path
+            d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5">
+          </path>
+        </svg> hanya untukmu.
+      </p>
+      <p class="text-xs text-rose-400 mt-1">Forever &amp; Always yours.</p>
+    </footer>
+  </main>
+  <!-- POPUP MODAL SURAT CINTA -->
+  <div
+    class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300"
+    id="letterModal">
+    <!-- Konten Surat -->
+    <div
+      class="glass-card bg-white/95 max-w-lg w-full rounded-3xl p-6 sm:p-8 shadow-2xl relative border-2 border-rose-200 transform scale-95 transition-all duration-300 max-h-[90vh] overflow-y-auto"
+      id="letterModalBox">
+      <!-- Tombol Tutup -->
+      <button
+        class="absolute top-4 right-4 p-2 text-gray-400 hover:text-rose-600 rounded-full hover:bg-rose-50 transition"
+        id="closeLetterBtn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="x"
+          aria-hidden="true" class="lucide lucide-x w-6 h-6">
+          <path d="M18 6 6 18"></path>
+          <path d="m6 6 12 12"></path>
+        </svg>
+      </button>
+      <!-- Hiasan Pita / Segel Lilin -->
+      <div class="text-center mb-4">
+        <span class="inline-block p-3 bg-rose-100 text-rose-600 rounded-full shadow-inner text-2xl">
+          💌
+        </span>
+        <h3 class="font-script text-3xl font-bold text-deepCrimson mt-2">Untuk Kesayanganku,</h3>
+      </div>
+      <!-- Isi Surat -->
+      <div
+        class="space-y-4 text-gray-700 leading-relaxed text-sm sm:text-base border-t border-b border-rose-100 py-4 my-2 font-normal">
+        <p class="">
+          Hai kamu yang paling manis,
+        </p>
+        <p class="">
+          Di hari kasih sayang ini, aku cuma mau mengingatkan betapa bersyukurnya aku punya kamu di dalam hidupku.
+          Kehadiranmu bikin hari yang biasa jadi luar biasa, dan senyummu selalu jadi alasan terbaikku untuk tetap
+          bersemangat.
+        </p>
+        <p class="">
+          Terima kasih sudah jadi teman ngobrol paling asik, pendengar setia, dan orang yang selalu bisa bikin aku
+          merasa nyaman jadi diriku sendiri. Semoga cinta kita selalu hangat, saling menjaga, dan dipenuhi tawa sampai
+          kapan pun.
+        </p>
+        <p class="font-script text-2xl text-right text-rose-600 pt-2">
+          Dengan penuh cinta,<br>
+          <span class="text-xl font-sans font-semibold text-gray-700">Beloved ❤️</span>
+        </p>
+      </div>
+      <!-- Action Footer -->
+      <div class="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
+        <button
+          class="w-full sm:w-auto px-6 py-2.5 bg-romanticRose hover:bg-deepCrimson text-white rounded-xl font-medium shadow-md hover:shadow-lg transition flex items-center justify-center gap-2"
+          id="celebrateBtn">
+          <span class="">Kirim Pelukan &amp; Konfeti!</span> 🎉
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- Audio Simulasi (Opsional) -->
+  <audio id="romanticAudio" loop="" preload="none">
+    <source src="https://assets.mixkit.co/music/preview/mixkit-romantic-moment-50.mp3" type="audio/mp3">
+  </audio>
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // 1. Floating Hearts Background Generator
+    const heartContainer = document.getElementById('heartContainer');
+    const heartSymbols = ['❤️', '💖', '💕', '💗', '🌸', '✨'];
+
+    function createFloatingHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'floating-heart';
+      heart.innerHTML = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+
+      const leftPos = Math.random() * 100;
+      const size = Math.random() * 20 + 14; // 14px to 34px
+      const duration = Math.random() * 7 + 7; // 7s to 14s
+      const delay = Math.random() * 2;
+
+      heart.style.left = `${leftPos}vw`;
+      heart.style.fontSize = `${size}px`;
+      heart.style.animationDuration = `${duration}s`;
+      heart.style.animationDelay = `${delay}s`;
+
+      heartContainer.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, (duration + delay) * 1000);
+    }
+
+    // Spawn floating hearts periodically
+    for (let i = 0; i < 15; i++) {
+      setTimeout(createFloatingHeart, i * 400);
+    }
+    setInterval(createFloatingHeart, 800);
+
+
+    // 2. Ganti Nama Pasangan Interaktif
+    function changeNamePrompt() {
+      const currentName = document.getElementById('partnerNameDisplay').innerText;
+      const newName = prompt("Masukkan nama pasanganmu:", currentName);
+      if (newName && newName.trim() !== "") {
+        document.getElementById('partnerNameDisplay').innerText = newName.trim();
+        triggerHeartConfetti();
+      }
+    }
+
+
+    // 3. Modal Surat Cinta
+    const openLetterBtn = document.getElementById('openLetterBtn');
+    const closeLetterBtn = document.getElementById('closeLetterBtn');
+    const letterModal = document.getElementById('letterModal');
+    const letterModalBox = document.getElementById('letterModalBox');
+    const celebrateBtn = document.getElementById('celebrateBtn');
+
+    function openModal() {
+      letterModal.classList.remove('hidden');
+      setTimeout(() => {
+        letterModal.classList.remove('opacity-0');
+        letterModalBox.classList.remove('scale-95');
+        letterModalBox.classList.add('scale-100');
+      }, 10);
+      triggerHeartConfetti();
+    }
+
+    function closeModal() {
+      letterModal.classList.add('opacity-0');
+      letterModalBox.classList.add('scale-95');
+      letterModalBox.classList.remove('scale-100');
+      setTimeout(() => {
+        letterModal.classList.add('hidden');
+      }, 300);
+    }
+
+    openLetterBtn.addEventListener('click', openModal);
+    closeLetterBtn.addEventListener('click', closeModal);
+    letterModal.addEventListener('click', (e) => {
+      if (e.target === letterModal) closeModal();
+    });
+
+    celebrateBtn.addEventListener('click', () => {
+      triggerHeartConfetti();
+      celebrateBtn.innerText = "Pelukan Terkirim! 🥰";
+      setTimeout(() => {
+        celebrateBtn.innerHTML = "<span>Kirim Pelukan & Konfeti Lagi!</span> 🎉";
+      }, 2500);
+    });
+
+
+    // 4. Tombol 'Enggak' yang Lari / Menghindar
+    const btnNo = document.getElementById('btnNo');
+    const btnYes = document.getElementById('btnYes');
+    const choiceArea = document.getElementById('choiceArea');
+    const successBox = document.getElementById('successBox');
+    const interactiveSubtitle = document.getElementById('interactiveSubtitle');
+
+    let escapeCount = 0;
+    const teasingTexts = [
+      "Enggak 😜",
+      "Eits, gak bisa! 😝",
+      "Yakin nih? 🥺",
+      "Kok kabur? 🙈",
+      "Ayo pencet 'Mau' aja! ❤️",
+      "Gak boleh nolak! 😜"
+    ];
+
+    function moveNoButton() {
+      escapeCount++;
+      // Ganti teks tombol No biar lucu dan usil
+      btnNo.innerText = teasingTexts[escapeCount % teasingTexts.length];
+
+      // Ambil dimensi area kontainer agar tombol tidak keluar layar
+      const containerRect = choiceArea.getBoundingClientRect();
+      const btnRect = btnNo.getBoundingClientRect();
+
+      // Hitung batas aman perpindahan (relatif terhadap kontainer)
+      const maxX = (containerRect.width / 2) - 40;
+      const maxY = 45; // Batas vertikal
+
+      const randomX = (Math.random() * (maxX * 2)) - maxX;
+      const randomY = (Math.random() * (maxY * 2)) - maxY;
+
+      btnNo.style.position = 'relative';
+      btnNo.style.transform = `translate(${randomX}px, ${randomY}px)`;
+
+      // Sedikit perbesar tombol YES tiap kali tombol NO dihindari!
+      const currentScale = 1 + (escapeCount * 0.06);
+      if (currentScale < 1.4) {
+        btnYes.style.transform = `scale(${currentScale})`;
+      }
+    }
+
+    // Support Mouse Hover & Mobile Touch
+    btnNo.addEventListener('mouseenter', moveNoButton);
+    btnNo.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      moveNoButton();
+    });
+    btnNo.addEventListener('click', (e) => {
+      e.preventDefault();
+      moveNoButton();
+    });
+
+
+    // 5. Tombol 'Mau' di Klik -> Tampilkan Confetti Hati & Feedback
+    btnYes.addEventListener('click', () => {
+      btnNo.style.display = 'none';
+      btnYes.style.display = 'none';
+      successBox.classList.remove('hidden');
+      interactiveSubtitle.innerText = "Yeayyy! Makasih sudah memilihku! 💖✨";
+
+      // Ledakan Confetti Hati Mewah
+      triggerHeartConfettiBurst();
+    });
+
+
+    // 6. Confetti Generator Khusus Bentuk & Warna Hati
+    function triggerHeartConfetti() {
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 50,
+          spread: 70,
+          origin: { y: 0.6 },
+          colors: ['#FF4D6D', '#FFB3C6', '#C9184A', '#FF758F'],
+          shapes: ['circle'],
+          ticks: 200
+        });
+      }
+    }
+
+    function triggerHeartConfettiBurst() {
+      if (typeof confetti === 'function') {
+        const count = 200;
+        const defaults = {
+          origin: { y: 0.7 }
+        };
+
+        function fire(particleRatio, opts) {
+          confetti(Object.assign({}, defaults, opts, {
+            particleCount: Math.floor(count * particleRatio)
+          }));
+        }
+
+        fire(0.25, {
+          spread: 26,
+          startVelocity: 55,
+          colors: ['#FF4D6D', '#FF758F']
+        });
+        fire(0.2, {
+          spread: 60,
+          colors: ['#FF8FA3', '#FFB3C6']
+        });
+        fire(0.35, {
+          spread: 100,
+          decay: 0.91,
+          scalar: 1.2,
+          colors: ['#C9184A', '#FF4D6D', '#FFF0F3']
+        });
+        fire(0.1, {
+          spread: 120,
+          startVelocity: 25,
+          decay: 0.92,
+          colors: ['#E29578', '#FFDDD2']
+        });
+      }
+    }
+
+
+    // 7. Musik Romantis Toggle
+    const musicToggle = document.getElementById('musicToggle');
+    const musicText = document.getElementById('musicText');
+    const romanticAudio = document.getElementById('romanticAudio');
+    let isPlaying = false;
+
+    musicToggle.addEventListener('click', () => {
+      if (!isPlaying) {
+        romanticAudio.play().then(() => {
+          isPlaying = true;
+          musicText.innerText = "Playing Melody 🎵";
+          musicToggle.classList.add('bg-rose-50', 'text-rose-700', 'border-rose-300');
+        }).catch(() => {
+          // If browser restricts autoplay
+          alert("Silakan klik sekali lagi untuk memutar melodi romantis! 🎶");
+        });
+      } else {
+        romanticAudio.pause();
+        isPlaying = false;
+        musicText.innerText = "Romantic Melody";
+        musicToggle.classList.remove('bg-rose-50', 'text-rose-700', 'border-rose-300');
+      }
+    });
+
+  </script>
+
+
+
+</body>
+
+</html>
